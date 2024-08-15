@@ -13,18 +13,17 @@ const auth = require('../controllers/auth');
 app.set('view engine', 'ejs');
 
 const uri = "mongodb+srv://manishkj007:Manish123@travels.3nn5z.mongodb.net/travels?retryWrites=true&w=majority";
+
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB Atlas!'))
   .catch(err => console.error('Connection error', err));
-  
-app.use(express.json());
 
+app.use(express.json());
 const imageStorage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'public/images'),
     filename: (req, file, cb) => cb(null, file.originalname)
 });
-
-app.use(multer({storage: imageStorage}).single('imageFile'));
+app.use(multer({ storage: imageStorage }).single('imageFile'));
 app.use(express.static('public'));
 app.use(cookieParser());
 
@@ -33,9 +32,13 @@ app.use('/callback-requests', callbackRequestsRouter);
 app.use('/emails', emailsRouter);
 app.use('/users', usersRouter);
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the travel app!');
+});
+
 app.get('/sight', async (req, res) => {
     let id = req.query.id;
-    let post = await Post.findOne({id:id});
+    let post = await Post.findOne({ id: id });
     res.render('sight', {
         title: post.title,
         imageUrl: post.imageUrl,
