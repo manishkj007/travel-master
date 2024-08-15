@@ -11,12 +11,8 @@ const Post = require('../models/posts').Post;
 const auth = require('../controllers/auth');
 
 app.set('view engine', 'ejs');
+mongodb://manishkj007:Manish123@travels-shard-00-02.3nn5z.mongodb.net:27017,travels-shard-00-00.3nn5z.mongodb.net:27017,travels-shard-00-01.3nn5z.mongodb.net:27017/travels?retryWrites=true&w=majority&ssl=true&authSource=admin&replicaSet=atlas-7yig85-shard-0
 
-const uri = "mongodb+srv://manishkj007:Manish123@travels.3nn5z.mongodb.net/travels?retryWrites=true&w=majority";
-
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB Atlas!'))
-  .catch(err => console.error('Connection error', err));
 
 app.use(express.json());
 const imageStorage = multer.diskStorage({
