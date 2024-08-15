@@ -32,8 +32,9 @@ app.use('/callback-requests', callbackRequestsRouter);
 app.use('/emails', emailsRouter);
 app.use('/users', usersRouter);
 
+
 app.get('/', (req, res) => {
-    res.send('Welcome to the travel app!');
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 app.get('/sight', async (req, res) => {
